@@ -1,6 +1,9 @@
 const documentFragment = document.createDocumentFragment();
 const shuffleButton = document.getElementById("btnShuffleNumbers");
+const sortButton = document.getElementById("btnSortNumbers");
 const numbersDiv = document.querySelector(".numbers");
+const numberDiv = document.getElementsByClassName("number");
+
 
 /* ----------------- Colors -------------------- */
 
@@ -47,4 +50,25 @@ shuffleButton.addEventListener("click", () => {
         documentFragment.appendChild(numbersDiv.children[Math.floor(Math.random() * numbersDiv.children.length)]);
     }
     numbersDiv.appendChild(documentFragment);
-})
+});
+
+/* ----------------- Sort Function in ascending order -------------------- */
+
+const sortDivNumbers = () => {
+    const numberDivArray = [...numberDiv];
+    const numericallyOrderedDivs = numberDivArray.sort((element1, element2) => {
+        return  element1.getAttribute('data-id') -  element2.getAttribute('data-id');
+    });
+
+    for ( let index = 0; index < numericallyOrderedDivs.length; index++ ) {
+        const numberDivElement = numericallyOrderedDivs[index];
+        documentFragment.appendChild(numberDivElement);
+    }
+    numbersDiv.appendChild(documentFragment);
+}
+
+/* ----------------- Sort button click event listener -------------------- */
+
+sortButton.addEventListener("click", () => {
+    sortDivNumbers();
+});
