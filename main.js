@@ -1,4 +1,5 @@
 const documentFragment = document.createDocumentFragment();
+const shuffleButton = document.getElementById("btnShuffleNumbers");
 const numbersDiv = document.querySelector(".numbers");
 
 /* ----------------- Colors -------------------- */
@@ -38,3 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
         numbersDiv.appendChild(divElement);                          
     }
 });
+
+/* ----------------- Shuffle button click event listener -------------------- */
+
+shuffleButton.addEventListener("click", () => {
+    while (numbersDiv.children.length) {
+        documentFragment.appendChild(numbersDiv.children[Math.floor(Math.random() * numbersDiv.children.length)]);
+    }
+    numbersDiv.appendChild(documentFragment);
+})
